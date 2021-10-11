@@ -16,12 +16,13 @@ class Tx:
         self.token_txs = token_txs
     
     def to_string(self):
+        token_txs_string = ""
         for token_tx in self.token_txs:
-            if token_txs_string is None:
+            if token_txs_string == "":
                 token_txs_string += token_tx.to_string()
             else: 
                 token_txs_string += ", " + token_tx.to_string()
-        return f"platform: {self.platform}, coin: {self.coin}, tx_id: {self.tx_id}, status: {self.status}, timestamp: {self.timestamp}, from_addr: {self.from_addr}, to_addr: {self.to_addr}, amount: {self.amount}, fees: {self.fees}, gas_price: {gas_price}, coin_price: {coin_price}, tokenTxs: {token_txs_string}"
+        return f"platform: {self.platform}, coin: {self.coin}, tx_id: {self.tx_id}, status: {self.status}, timestamp: {self.timestamp}, from_addr: {self.from_addr}, to_addr: {self.to_addr}, amount: {self.amount}, fees: {self.fees}, gas_price: {self.gas_price}, coin_price: {self.coin_price}, tokenTxs: {token_txs_string}"
 
 class TokenTx:
     def __init__(self,token,from_addr,to_addr,amount):

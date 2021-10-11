@@ -12,8 +12,8 @@ class TxLedger:
         self.db.close()
     
     # add a transaction to the db
-    def put_tx(self,platform,tx_id,tx):
-        self.db[platform+tx_id] = tx
+    def put_tx(self,tx):
+        self.db[tx.platform+tx.tx_id] = tx
 
     # retrieve a transaction from the db
     def get_tx(self,platform,tx_id):
@@ -30,5 +30,5 @@ class TxLedger:
     # print database content
     def print_db(self):
         for key in self.db.keys():
-            print(key + " - " + self.db[key])
+            print(key + " - " + self.db[key].to_string())
 
