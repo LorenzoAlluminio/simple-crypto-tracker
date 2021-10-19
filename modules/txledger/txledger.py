@@ -1,4 +1,3 @@
-import os
 import shelve
 
 class TxLedger: 
@@ -12,14 +11,15 @@ class TxLedger:
         self.db.close()
     
     # add a transaction to the db
-    # TODO add check for already existing transaction
     def put_tx(self,tx):
         if tx.platform not in self.db:
             self.db[tx.platform] = {}
-        self.db[tx.platform][tx.tx_id] = tx
+        if tx.tx_id in self.db[tx.platform]:
+            raise Exception("A tx with the same hash has already been inserted. Insertion aborted.")
+        else:
+            self.db[tx.platform][tx.tx_id] = tx
 
     # retrieve a transaction from the db
-    #TODO raise an error instead of return None? to consider
     def get_tx(self,platform,tx_id):
         if platform in self.db and tx_id in self.db[platform]:
             return self.db[platform][tx_id]
